@@ -2,7 +2,6 @@
 *.ptx
 *.cubin
 *.fatbin
-**/*.csv
 **/*.out
 poisson
 **/*.err
