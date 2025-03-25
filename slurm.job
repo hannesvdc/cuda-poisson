@@ -1,0 +1,20 @@
+#!/bin/bash
+#SBATCH --job-name=poisson-gpu
+#SBATCH --output=poisson.out
+#SBATCH --error=poisson.err
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --time=01:00:00
+#SBATCH --gres=gpu:1
+#SBATCH --partition=h100
+
+# Load the module system and CUDA
+source /apps/Lmod
+module load gcc/9.3.0
+module load cuda/12.3.0
+
+# Compile your code (or skip if precompiled)
+nvcc -O3 -o poisson_cuda poisson.cu
+
+# Run the solver
+./poisson_cuda

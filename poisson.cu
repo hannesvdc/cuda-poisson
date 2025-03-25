@@ -97,7 +97,7 @@ int main() {
     cudaMemcpy(u_old, u_old_d, size_bytes, cudaMemcpyDeviceToHost);
 
     // Store result in CSV file
-    writeSolutionToCSV("solution.csv", u_old, N);
+    writeSolutionToCSV("solution_cuda.csv", u_old, N);
 
     // Free memory
     cudaFree(u_old_d);
