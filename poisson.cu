@@ -4,6 +4,7 @@
 #include <algorithm>
 
 // Index helper function
+__device__
 int getArrayIndex(int x_index, int y_index, int N) {
     return N * y_index + x_index;
 }
