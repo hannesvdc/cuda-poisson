@@ -74,7 +74,7 @@ int main() {
             int index = getArrayIndex(x_index, y_index, N);
             float x = x_index * dx;
             float y = y_index * dx;
-            f[index] = -sin(M_PI * x) * sin(M_PI * y);
+            f[index] = -sin(2.0 * M_PI * x) * sin(M_PI * y);
         }
     }
 
