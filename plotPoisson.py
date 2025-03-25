@@ -1,8 +1,11 @@
 import numpy as np
+import numpy.linalg as lg
 import matplotlib.pyplot as plt
 
 # Load the CSV file
 data = np.loadtxt("solution.csv", delimiter=',')
+data_cuda = np.loadtxt("solution_cuda.csv", delimiter=',')
+print(lg.norm(data - data_cuda, ord=np.inf))
 N = data.shape[0]
 
 X = np.linspace(0.0, 1.0, N)
