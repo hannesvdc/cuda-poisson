@@ -12,7 +12,7 @@ int getArrayIndex(int x_index, int y_index, int N) {
 __global__
 void initializeRHS(float *f, float dx, int N) {
     int x = blockIdx.x * blockDim.x + threadIdx.x; // global x-index = block_size * which block am I + which thread am I?
-    int y = blockIdx.y * blockDim.y + threadIdx.y; // global x-index = block_size * which block am I + which thread am I?
+    int y = blockIdx.y * blockDim.y + threadIdx.y; // global y-index = block_size * which block am I + which thread am I?
 
     float x_coord = x * dx;
     float y_coord = y * dx;
