@@ -2,6 +2,7 @@
 #include <cuda_runtime.h>
 #include <fstream>
 #include <algorithm>
+#include <chrono>
 
 // Index helper function
 __device__
@@ -84,6 +85,11 @@ int main() {
 
 
     // Call the Jacobi solver iteratively
+    cudaEvent_t start, stop;
+    cudaEventCreate(&start);
+    cudaEventCreate(&stop);
+
+    cudaEventRecord(start);
     int max_iter = 100000;
     for (int iter = 0; iter < max_iter; ++iter) {
         jacobi_step<<<gridDim, blockDim>>>(u_old_d, u_new_d, f_d, dx, N);
@@ -91,6 +97,12 @@ int main() {
         // Swap pointers (u_old becomes input for next iteration)
         std::swap(u_old_d, u_new_d);
     }
+    cudaEventRecord(stop);
+    cudaEventSynchronize(stop);
+
+    float milliseconds = 0;
+    cudaEventElapsedTime(&milliseconds, start, stop);
+    std::cout << "GPU time: " << milliseconds / 1000.0f << " seconds" << std::endl;
 
     // Move the solution u_old_d to the CPU
     cudaDeviceSynchronize();

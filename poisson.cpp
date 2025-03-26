@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <cmath>
+#include <chrono>
 
 // Index helper function
 int getArrayIndex(int x_index, int y_index, int N) {
@@ -80,7 +81,11 @@ int main() {
     }
 
     // Solve the Poisson equation and save to file for visualization.
+    auto start = std::chrono::high_resolution_clock::now();
     solvePoissonEquationJacobi(u_old, u_new, f, dx, N);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = end - start;
+    std::cout << "Wall time: " << elapsed.count() << " seconds" << std::endl;
     writeSolutionToCSV("solution.csv", u_old, N);
 
     // Delete all pointers
