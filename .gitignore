@@ -6,3 +6,4 @@
 poisson
 **/*.err
 **/*.out
+**/.vscode
